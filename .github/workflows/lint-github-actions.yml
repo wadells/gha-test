@@ -21,7 +21,7 @@ jobs:
               - '.github/*/**/*.{yaml,yml}'
       - name: Ensure SHA pinned actions
         uses: zgosalvez/github-actions-ensure-sha-pinned-actions@b35f285b9bb7e80de0967367cee66d3b6d50ceca # v3.0.1
-        if: steps.changes.outputs.github-actions == 'true'
+        # if: steps.changes.outputs.github-actions == 'true'
         with:
           allowlist: |
             github/
