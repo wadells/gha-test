@@ -1,0 +1,27 @@
+on:
+  pull_request:
+    branches:
+      - main
+
+name: Continuous Integration
+
+jobs:
+  check-github-actions:
+    name: Check GitHub Actions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Check for affected paths
+        id: changes
+        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 # v2.11.1
+        with:
+          filters: |
+            github-actions:
+              - '.github/*/**/*.{yaml,yml}'
+      - name: Ensure SHA pinned actions
+        uses: zgosalvez/github-actions-ensure-sha-pinned-actions@b35f285b9bb7e80de0967367cee66d3b6d50ceca # v3.0.1
+        if: steps.changes.outputs.github-actions == 'true'
+        with:
+          allowlist: |
+            github/
