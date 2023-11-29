@@ -1,0 +1,21 @@
+on:
+  pull_request:
+    branches:
+      - main
+
+name: Test Two
+
+jobs:
+  checkout:
+    name: Check GitHub Actions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+  update-ami-ids:
+    name: Update AMI IDs
+    uses: gravitational/teleport/.github/workflows/update-ami-ids.yaml@master
+    secrets: inherit
+    with:
+      version: v0.0.0
+
